@@ -8,7 +8,7 @@ import akka.testkit.TestActorRef
 class SupervisionTest extends ActorTest {
 
   trait Builder {
-    val supervisorRef = TestActorRef(Props[Supervisor], "supervisor")
+    val supervisorRef = TestActorRef(Props[Supervisor])
     supervisorRef ! Props[Child]
     val childRef = expectMsgType[ActorRef]
   }

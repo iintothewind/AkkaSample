@@ -7,7 +7,7 @@ import akka.testkit.{EventFilter, TestActorRef}
 class SideEffectActorTest extends ActorTest {
   "A LogPrintActor" should "print messages when it receives them" in {
     val logPrintActor = TestActorRef(Props[LogPrintActor])
-    EventFilter.info(pattern = "(.*)(Test)(.*)", occurrences = 1).intercept {
+    EventFilter.info(pattern = "(.*)(Test)(.*)").intercept {
       logPrintActor ! "Test"
     }
   }

@@ -7,7 +7,7 @@ import akka.testkit.TestActorRef
 
 class FilteringActorTest extends ActorTest {
   "A FilteringActor" should "be able to filter out particular messages" in {
-    val filteringActor = TestActorRef(Props(classOf[FilteringActor], 5), "filteringActor")
+    val filteringActor = TestActorRef(Props(classOf[FilteringActor], 5), "filteringActor1")
     filteringActor ! Event(1)
     filteringActor ! Event(2)
     filteringActor ! Event(1)
@@ -22,7 +22,7 @@ class FilteringActorTest extends ActorTest {
   }
 
   it should "be able to filter out the unexpected message" in {
-    val filteringActor = TestActorRef(Props(classOf[FilteringActor], 5), "filteringActor")
+    val filteringActor = TestActorRef(Props(classOf[FilteringActor], 5), "filteringActor2")
     filteringActor ! Event(1)
     filteringActor ! Event(2)
     expectMsg(Event(1))

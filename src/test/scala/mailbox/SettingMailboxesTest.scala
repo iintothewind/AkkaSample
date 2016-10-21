@@ -11,13 +11,13 @@ class SettingMailboxesTest(_system: ActorSystem) extends ActorTest(_system) {
   "A BoundedMailbox" should "be used when creating actor with BoundedMessageQueueSemantics" in {
     // with RequiresMessageQueue[BoundedMessageQueueSemantics] does not work when ref is created with:
     // TestActorRef(Props[BoundedActor], "boundedActor")
-    val boundedActorRef = TestActorRef(Props[BoundedActor].withMailbox("akka.bounded-mailbox"), "boundedActor")
+    val boundedActorRef = TestActorRef(Props[BoundedActor].withMailbox("akka.bounded-mailbox"), "boundedActor1")
     boundedActorRef ! "mailbox"
     expectMsgPF() { case s: String => s shouldBe "akka.bounded-mailbox" }
   }
 
   it should "be used in dispatcher when mailbox-requirement is BoundedMessageQueueSemantics" in {
-    val boundedActorRef = TestActorRef(Props[BoundedActor].withDispatcher("akka.pinned-dispatcher"), "boundedActor")
+    val boundedActorRef = TestActorRef(Props[BoundedActor].withDispatcher("akka.pinned-dispatcher"), "boundedActor2")
     //boundedActorRef ! "mailbox"
     //expectMsgPF() { case s: String => s shouldBe "akka.bounded-mailbox" }
   }

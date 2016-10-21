@@ -4,8 +4,17 @@ version := "1.0"
 
 scalaVersion := "2.11.8"
 
-lazy val akkaVersion = "2.4.4"
-lazy val log4jVersion = "2.5"
+scalacOptions ++= Seq(
+  "-deprecation",
+  "-encoding", "UTF-8", // yes, this is 2 args
+  "-unchecked",
+  "-Xlint",
+  "-Ywarn-dead-code"
+  // "-Xfuture" // breaks => Unit implicits
+)
+
+lazy val akkaVersion = "2.4.11"
+lazy val log4jVersion = "2.7"
 lazy val latest = "latest.integration"
 
 ivyScala := ivyScala.value map {
@@ -28,4 +37,6 @@ libraryDependencies ++= Seq(
   "com.novocode" % "junit-interface" % "0.11" % "test"
 )
 
-testOptions += Tests.Argument(TestFrameworks.JUnit, "-v")
+
+
+testOptions += Tests.Argument(TestFrameworks.JUnit, "-q", "-v")

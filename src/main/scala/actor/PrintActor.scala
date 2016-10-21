@@ -10,6 +10,6 @@ class ConsolePrintActor extends Actor {
 
 class LogPrintActor extends Actor with ActorLogging {
   override def receive: Receive = {
-    case msg: String => log.info(msg)
+    case msg: String => log.warning(s"msg = $msg")
   }
 }

@@ -10,9 +10,9 @@ import scala.concurrent.Await
 import scala.concurrent.duration._
 
 /**
- * with RequiresMessageQueue[BoundedMessageQueueSemantics] does not work when ref is created with:
- * TestActorRef(Props[BoundedActor], "boundedActor")
- */
+  * with RequiresMessageQueue[BoundedMessageQueueSemantics] does not work when ref is created with:
+  * TestActorRef(Props[BoundedActor], "boundedActor")
+  */
 class BoundedActor
   extends EchoActor with RequiresMessageQueue[BoundedMessageQueueSemantics] {
   @throws[Exception](classOf[Exception])
@@ -24,7 +24,7 @@ class BoundedActor
   override def receive: Receive = {
     case "dispatcher" => sender() ! context.dispatcher.toString
     // return the mailbox config, but not the actor is really using unless defined in akka.actor.deployment or use props.withMailbox(), why???
-    case "mailbox" => log.info(s"context.props.mailbox: ${context.props.mailbox}")
+    case "mailbox" => sender() ! context.props.mailbox
     case Echo(msg) => sender().tell(Echo(msg), self)
     // Identify(message), message can be anything, which will be return in ActorIdentity(correlation, Some(ref)) if any actor has been found
     case FindActor(path) => context.actorSelection(path) ! Identify(path.toString)

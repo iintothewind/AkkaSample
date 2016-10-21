@@ -1,9 +1,8 @@
 package router
 
-import actor.EchoActor.Echo
-import actor.{EchoActor, ActorTest}
-import akka.actor.{Props, ActorSystem}
-import akka.routing.{RoundRobinPool, Broadcast, FromConfig}
+import actor.ActorTest
+import akka.actor.{ActorSystem, Props}
+import akka.routing.{Broadcast, FromConfig, RoundRobinPool}
 import com.typesafe.config.ConfigFactory
 
 class PoolTest(_system: ActorSystem) extends ActorTest(_system) {
@@ -25,7 +24,7 @@ class PoolTest(_system: ActorSystem) extends ActorTest(_system) {
   }
 
   it should "also be created programmatically instead of configuration" in {
-    val roundRobinRouterRef = system.actorOf(RoundRobinPool(5).props(Props[Worker]), "round-robin-router")
+    val roundRobinRouterRef = system.actorOf(RoundRobinPool(5).props(Props[Worker]), "roundRobinRouter")
     roundRobinRouterRef ! "001"
     roundRobinRouterRef ! "002"
     roundRobinRouterRef ! "003"

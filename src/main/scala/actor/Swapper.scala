@@ -7,10 +7,10 @@ case object Swap
 class Swapper extends Actor with ActorLogging {
   override def receive: Receive = {
     case Swap =>
-      log.info("Hi")
+      sender() ! "Hi"
       context.become({
         case Swap =>
-          log.info("Hey")
+          sender() ! "Hey"
           context.unbecome()
       }, discardOld = false)
   }
